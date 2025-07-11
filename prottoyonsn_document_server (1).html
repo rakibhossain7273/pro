@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="bn">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>প্রত্যয়ন সার্ভার</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+<link href="new_voter_cert_form.html" rel="stylesheet"/>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap');
+    body {
+      font-family: 'Noto Sans Bengali', sans-serif;
+      background: #f2f3f7;
+      margin: 0;
+    }
+    header {
+      background: #7ccf46;
+      color: white;
+      padding: 10px 20px;
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+    }
+    header .logo img {
+      width: 35px;
+      height: 35px;
+      margin-right: 10px;
+    }
+    header .profile {
+      display: flex;
+      align-items: center;
+    }
+    header .profile img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+    nav {
+      width: 250px;
+      background: #fff;
+      height: 100vh;
+      float: left;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+    nav h3 {
+      margin: 10px;
+      padding: 10px;
+      background: #78b43d;
+      color: #fff;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    nav li a {
+      display: block;
+      padding: 12px 15px;
+      color: #333;
+      text-decoration: none;
+      border-left: 4px solid transparent;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+    nav li a:hover,
+    nav li a.active {
+      background: #e6ffe6;
+      border-left: 4px solid #78b43d;
+      font-weight: bold;
+    }
+    main {
+      margin-left: 260px;
+      padding: 20px;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 15px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      text-align: center;
+      padding: 15px 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+      transition: transform 0.2s;
+      border: 1px solid #e1e1e1;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .card i {
+      font-size: 32px;
+      color: #7ccf46;
+      margin-bottom: 10px;
+    }
+    .card h4 {
+      margin: 0;
+      font-size: 14px;
+      color: #333;
+    }
+    #profile-section, #certificate-section, #apply-section {
+      display: none;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    #profile-section h3, #apply-section h3 {
+      margin-top: 0;
+      font-size: 18px;
+      color: #444;
+    }
+    #profile-section p, #apply-section p {
+      margin: 5px 0;
+      color: #222;
+    }
+  </style>
+<script>
+    function showApply() {
+      document.getElementById('apply-section').style.display = 'block';
+      document.getElementById('profile-section').style.display = 'none';
+      document.getElementById('certificate-section').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  function showProfile() {
+  document.getElementById('profile-section').style.display = 'block';
+  document.getElementById('apply-section').style.display = 'none';
+  document.getElementById('certificate-section').style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showCertificates() {
+  document.getElementById('certificate-section').style.display = 'block';
+  document.getElementById('profile-section').style.display = 'none';
+  document.getElementById('apply-section').style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showNewUserForm() {
+  alert('নতুন ব্যবহারকারীর তথ্য ফর্ম এখান থেকে শুরু হবে।');
+}
+</script>
+</head>
+<body>
+<header>
+<div class="logo">
+<img alt="Logo" src="2bd3bbe0-9974-4d99-9e72-24cedb3e7f70.png"/>
+<span>প্রত্যয়ন পোর্টাল</span>
+</div>
+<div class="profile">
+<img alt="Profile" src="profile.jpg"/> রাকিবুল মিয়া
+    </div>
+</header>
+<nav>
+<h3>সব মেনু</h3>
+    $1<li><a onclick="showCertificates()">ড্যাশবোর্ড</a></li>
+<li><a onclick="showProfile()">প্রোফাইল ব্যবস্থাপনা</a></li>
+<li><a onclick="showApply()">নাগরিক ইউনিক নম্বর</a></li>
+<li><a href="#">সকল আবেদন তালিকা</a></li>
+<li><a onclick="showApply()">নতুন আবেদন করুন</a></li>
+<li><a href="#">ট্র্যাক আইডি নাম্বার</a></li>
+<li><a href="#">জীবন বৃত্তান্ত তথ্য প্রিন্ট</a></li>
+<li><a href="#">জীবন বৃত্তান্ত আবেদনসমূহ</a></li>
+<li><a href="#">হোল্ডিং তথ্য প্রিন্ট</a></li>
+<li><a href="#">হোল্ডিং তথ্য আবেদনসমূহ</a></li>
+<li><a href="#">সনদ প্রিন্ট করুন</a></li>
+<li><a href="#">প্যাকেট রিপোর্ট</a></li>
+<li><a href="#">ব্যবহার নির্দেশিকা</a></li>
+<li><a href="#">লগ আউট</a></li>
+
+</nav>
+<main>
+<div id="profile-section">
+<h3>প্রোফাইল তথ্য</h3>
+<p><strong>নাম:</strong> রাকিবুল মিয়া</p>
+<p><strong>ই-মেইল:</strong> rakibhossain72730@gmail.com</p>
+<p><strong>মোবাইল:</strong> ০১৩০০৫২৯২৯১</p>
+<p><strong>জন্ম নিবন্ধন:</strong> ২০০৩১৪৯২৫০০০০৩৫৮</p>
+<p><strong>ইউনিয়ন:</strong> ৪ নং ইউনিয়ন, ইটনা, কিশোরগঞ্জ</p>
+</div>
+<div id="certificate-section">
+<h2>সনদ সেবাসমূহ</h2>
+<div class="card-grid">
+<div class="card"><i class="fas fa-house"></i><h4>হোল্ডিং ট্যাক্স</h4></div>
+<div class="card"><i class="fas fa-people-group"></i><h4>ওয়ারিশান সনদ</h4></div>
+<div class="card"><i class="fas fa-users"></i><h4>পারিবারিক সনদ</h4></div>
+<div class="card"><i class="fas fa-file-lines"></i><h4>উত্তরাধিকার সনদ</h4></div>
+<a href="n_i.html" >
+<div class="card"><i class="fas fa-circle-check"></i><h4>কম্পিউটার প্রত্যয়ন</h4></div></a>
+<div class="card"><i class="fas fa-id-card"></i><h4>জাতীয়তা সনদ</h4></div>
+<div class="card"><i class="fas fa-user"></i><h4>নাগরিক সনদ</h4></div>
+
+<div class="card"><i class="fas fa-person-circle-xmark"></i> ‍<a href="date_i.html" style="text-decoration: none;"><h4>মৃত্যু সনদ</h4> </a></div>
+
+<a href="new_voter_cert_form.html" style="text-decoration: none;">
+<div class="card">
+<i class="fas fa-address-card"></i>
+<h4>নতুন ভোটার প্রত্যয়ন</h4>
+</div>
+</a>
+<div class="card"><i class="fas fa-people-roof"></i><h4>পুনঃপরিবার সনদ</h4></div>
+<div class="card"><i class="fas fa-location-dot"></i><h4>ভূমি সনদ</h4></div>
+<div class="card"><i class="fas fa-print"></i><h4>সনদ প্রিন্ট</h4></div>
+<a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-person-cane"></i><h4>বিধবা প্রত্যয়ন</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-briefcase"></i><h4>পেশাগত সনদ</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-hand-holding-heart"></i><h4>অভিভাবক সমর্থন সনদ</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-people-group"></i><h4>সম্প্রদায় সনদ</h4></div></a>
+
+
+ 
+  <div class="card"><i class="fas fa-seedling">
+    <a href="krishi_i.html" style="text-decoration: none;">
+
+  </i><h4>কৃষি প্রত্যয়ন</h4> 
+</a>
+</div>
+
+
+
+</a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-user"></i><h4>অবিবাহিত সনদ</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-flag"></i><h4>মুক্তিযোদ্ধা প্রত্যয়ন</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-coins"></i><h4>বার্ষিক আয়ের সনদ</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-child-reaching"></i><h4>এতিম সনদ</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-venus-mars"></i><h4>বিবাহিত প্রত্যয়ন</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-passport"></i><h4>পাসপোর্ট প্রদানের প্রত্যয়ন</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-heartbeat"></i><h4>জীবিত ব্যক্তির প্রত্যয়ন</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-sack-dollar"></i><h4>মাসিক আয়ের সনদ</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-handshake"></i><h4>উপকারভোগী সনদ</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-user-slash"></i><h4>চাকরিচ্যুত সনদ</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-map-location"></i><h4>ভোটার এলাকা স্থানান্তর প্রত্যয়ন</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-id-card"></i><h4>একই ব্যক্তির প্রত্যয়ন</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-pen-to-square"></i><h4>জাতীয় পরিচয় তথ্য সংশোধন প্রত্যয়ন</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-wheelchair"></i><h4>প্রতিবন্ধী সনদ</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-ban"></i><h4>নিষ্কণ্টক প্রত্যয়ন</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-hand-holding-dollar"></i><h4>আর্থিক অস্বচ্ছলতার সনদ</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-user-xmark"></i><h4>অস্বামী সনদ</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-building-columns"></i><h4>প্রিন্সিপাল লাইসেন্স</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-id-badge"></i><h4>ট্রেড লাইসেন্স</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-person-half-dress"></i><h4>পুনর্বিবাহ না হওয়ার প্রত্যয়ন</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-bank"></i><h4>ব্যাংক অ্যাকাউন্ট প্রত্যয়ন</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-location-dot"></i><h4>ঠিকানা পরিবর্তন প্রত্যয়ন</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-plane-departure"></i><h4>বিদেশগমন প্রত্যয়ন</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-user-tie"></i><h4>চাকরি প্রত্যয়ন</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-map-pin"></i><h4>অস্থায়ী ঠিকানা প্রত্যয়ন</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-school"></i><h4>স্কুল প্রত্যয়ন</h4></div></a><a href="#" style="text-decoration: none;"><div class="card"><i class="fas fa-circle-exclamation"></i><h4>দারিদ্র্য সনদ</h4></div></a></div>
+</div>
+<div id="apply-section">
+<h3 style="background: #814d9c; color: white; padding: 10px; border-radius: 5px;">ব্যবহারকারীর ধরন</h3>
+<div style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px; width: 200px;">
+<button onclick="showNewUserForm()" style="background: #9b59b6; color: white; padding: 12px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+          নতুন ব্যবহারকারী
+        </button>
+<button style="background: #9b59b6; color: white; padding: 12px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+          নির্ধারিত ব্যবহারকারী
+        </button>
+</div>
+</div>
+</main>
+</body>
+</html>
