@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>প্রত্যয়ন ড্যাশবোর্ড</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Noto Sans Bengali', sans-serif;
+    }
+    body {
+      background: #f2f4f8;
+      display: flex;
+      height: 100vh;
+    }
+    .sidebar {
+      width: 220px;
+      background: #003366;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 22px;
+    }
+    .sidebar button {
+      background: #004080;
+      color: white;
+      border: none;
+      padding: 12px;
+      margin-bottom: 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .main {
+      flex-grow: 1;
+      padding: 30px;
+      overflow-y: auto;
+    }
+    .topbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .profile img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ccc;
+    }
+    .profile-info {
+      line-height: 1.4;
+    }
+    .container {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 800px;
+      margin: auto;
+    }
+    .container h2 {
+      text-align: center;
+      color: #003366;
+      margin-bottom: 20px;
+    }
+    label { display: block; margin-top: 12px; }
+    input, select {
+      width: 100%; padding: 10px; font-size: 16px;
+      border-radius: 6px; border: 1px solid #ccc; margin-top: 6px;
+    }
+    button.submit {
+      margin-top: 20px; padding: 12px 20px;
+      background: #004080; color: white; font-size: 16px;
+      border: none; border-radius: 6px; cursor: pointer;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  
+
+  <div class="main">
+    <div class="topbar">
+      <div class="profile">
+        <img src="https://via.placeholder.com/50" alt="প্রোফাইল ছবি">
+        <div class="profile-info">
+          <div><strong>নাম:</strong> রাকিবুল হাসান</div>
+          <div><strong>মোবাইল:</strong> 01828083730</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>বিধবা প্রত্যয়ন এর জন্য তথ্য প্রদান করুন</h2>
+      <label>সনদ টাইপ:</label>
+      <select id="certType" onchange="toggleFields()">
+        
+    
+        <option value="newVoter">বিধবা প্রত্যায়ন</option>
+         
+      </select>
+
+      <label>ইউনিয়ন:</label>
+      <select id="union" onchange="autoPost()">
+        <option value="">ইউনিয়ন নির্বাচন করুন</option>
+        <option value="১নং রায়টুটী|রায়টুটী|মোহাম্মদ এনামূল হক খান মিল্কী">১নং রায়টুটী</option>
+        <option value="২নং ধনপুর|ধনপুর|প্রদীপ কুমার দাস">২নং ধনপুর</option>
+        <option value="৩নং মৃগা|মৃগা|মোঃ দারুল ইসলাম">৩নং মৃগা</option>
+        <option value="৪নং ইটনা|ইটনা|মোঃ সোহাগ মিয়া">৪নং ইটনা</option>
+        <option value="৫নং বড়িবাড়ি|বাদলা|আঃ ছাত্তার">৫নং বড়িবাড়ি</option>
+        <option value="৬নং বাদলা|বাদলা|আদিলুজ্জামান ভূঞা">৬নং বাদলা</option>
+        <option value="৭নং এলংজুরী|এলংজুরী|রুবেল মিয়া">৭নং এলংজুরী</option>
+        <option value="৮নং জয়সিদ্ধি|জয়সিদ্ধি|মোঃ মনির উদ্দিন">৮নং জয়সিদ্ধি</option>
+        <option value="৯নং চৌগাংগা|চৌগাংগা|সাইফুল ইসলাম">৯নং চৌগাংগা</option>
+      </select>
+
+      <label>নাম:</label><input id="name">
+      <label>পিতাঃ</label><input id="father">
+      <label>মাতাঃ</label><input id="mother">
+
+      <div id="nidDiv">
+        <label>জাতীয় পরিচয়পত্র নম্বর:</label><input id="nid">
+      </div>
+      <div id="birthDiv" style="display:none;">
+        <label>জাতীয় পরিচয়পত্র নম্বর-</label><input id="birth">
+      </div>
+
+      <label>গ্রাম:</label><input id="village">
+      <label>ডাকঘর:</label><input id="post">
+      <label>ওয়ার্ড:</label><input id="ward">
+
+      <button class="submit" onclick="openCertificate()">প্রত্যয়ন দেখান</button>
+    </div>
+  </div>
+  <div class="card"><i class="fas fa-house"></i><h4>হোল্ডিং ট্যাক্স</h4></div>
+
+  <script>
+    function toggleFields() {
+      const type = document.getElementById("certType").value;
+      document.getElementById("nidDiv").style.display = type === "default" ? "block" : "none";
+      document.getElementById("birthDiv").style.display = type === "newVoter" ? "block" : "none";
+    }
+    function autoPost() {
+      const val = document.getElementById('union').value;
+      const parts = val.split('|');
+      if (parts.length > 1) {
+        document.getElementById('post').value = parts[1];
+      }
+    }
+    function openCertificate() {
+      const data = {
+        type: document.getElementById("certType").value,
+        union: document.getElementById("union").value,
+        name: document.getElementById("name").value,
+        father: document.getElementById("father").value,
+        mother: document.getElementById("mother").value,
+        nid: document.getElementById("nid").value,
+        birth: document.getElementById("birth").value,
+        village: document.getElementById("village").value,
+        post: document.getElementById("post").value,
+        ward: document.getElementById("ward").value
+      };
+      const params = new URLSearchParams(data).toString();
+      window.open("bidoba.html?" + params, "_blank");
+    }
+    window.onload = toggleFields;
+  </script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>হিসাবের খাতা</title>
+  <link rel="icon" type="image/png" href="edcdeb2b-16ef-426b-8f25-09da61d2fa2f.png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap');
+    body {
+      font-family: 'Noto Sans Bengali', sans-serif;
+      background: #f4f7f8;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #2e3b4e;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 26px;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      display: flex;
+      gap: 30px;
+    }
+    .form-section {
+      width: 35%;
+    }
+    .form-section label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+    .form-section input,
+    .form-section select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .form-section button {
+      padding: 10px 20px;
+      background: #00796b;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .form-section button:hover {
+      background: #004d40;
+    }
+    .table-section {
+      width: 65%;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    th {
+      background: #e0f2f1;
+    }
+    .summary {
+      text-align: center;
+      font-size: 18px;
+      margin-top: 30px;
+    }
+    .action-btns button {
+      margin: 0 5px;
+      background: #d32f2f;
+    }
+    .action-btns button.edit {
+      background: #1976d2;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    হিসাবের খাতা
+  </header>
+
+  <div class="container">
+    <div class="form-section">
+      <label>আজকের তারিখ</label>
+      <input type="text" id="date" readonly>
+
+      <label>জমা (৳)</label>
+      <input type="number" id="income" placeholder="যদি না থাকে তবে 0 দিন">
+
+      <label>ব্যয়ের পরিমাণ (৳)</label>
+      <input type="number" id="expense" placeholder="যদি না থাকে তবে 0 দিন">
+
+      <label>ব্যয়ের ধরন</label>
+      <select id="expenseType">
+        <option value="কিস্তি">কিস্তি</option>
+        <option value="লটারি">লটারি</option>
+        <option value="বাজার">বাজার</option>
+        <option value="অন্যান্য">অন্যান্য</option>
+      </select>
+
+      <label>বিবরণ</label>
+      <input type="text" id="note" placeholder="যেমন: বাজার, বিদ্যুৎ বিল">
+
+      <button onclick="addEntry()">হিসাব যোগ করুন</button>
+    </div>
+
+    <div class="table-section">
+      <table id="recordTable">
+        <thead>
+          <tr>
+            <th>তারিখ</th>
+            <th>জমা</th>
+            <th>ব্যয়</th>
+            <th>ধরন</th>
+            <th>বিবরণ</th>
+            <th>ব্যালেন্স</th>
+            <th>অ্যাকশন</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <div class="summary">
+        <p>মোট জমা: <span id="totalIncome">0</span> ৳</p>
+        <p>মোট ব্যয়: <span id="totalExpense">0</span> ৳</p>
+        <p>মোট ব্যালেন্স: <span id="netBalance">0</span> ৳</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const dateField = document.getElementById("date");
+    dateField.value = new Date().toISOString().split('T')[0];
+
+    let entries = JSON.parse(localStorage.getItem("hisabEntries") || "[]");
+    let editingId = null;
+
+    function addEntry() {
+      const date = dateField.value;
+      const income = parseFloat(document.getElementById("income").value) || 0;
+      const expense = parseFloat(document.getElementById("expense").value) || 0;
+      const type = document.getElementById("expenseType").value;
+      const note = document.getElementById("note").value;
+
+      const balance = income - expense;
+
+      if (editingId) {
+        const index = entries.findIndex(e => e.id === editingId);
+        if (index !== -1) {
+          entries[index] = { id: editingId, date, income, expense, type, note, balance };
+        }
+        editingId = null;
+      } else {
+        const entry = { id: Date.now(), date, income, expense, type, note, balance };
+        entries.push(entry);
+      }
+
+      localStorage.setItem("hisabEntries", JSON.stringify(entries));
+
+      document.getElementById("income").value = "";
+      document.getElementById("expense").value = "";
+      document.getElementById("note").value = "";
+
+      renderTable();
+    }
+
+    function deleteEntry(id) {
+      entries = entries.filter(e => e.id !== id);
+      localStorage.setItem("hisabEntries", JSON.stringify(entries));
+      renderTable();
+    }
+
+    function editEntry(id) {
+      const entry = entries.find(e => e.id === id);
+      if (entry) {
+        editingId = id;
+        document.getElementById("income").value = entry.income;
+        document.getElementById("expense").value = entry.expense;
+        document.getElementById("expenseType").value = entry.type;
+        document.getElementById("note").value = entry.note;
+      }
+    }
+
+    function renderTable() {
+      const tbody = document.querySelector("#recordTable tbody");
+      tbody.innerHTML = "";
+      let totalIncome = 0, totalExpense = 0;
+
+      entries.forEach(entry => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${entry.date}</td>
+          <td>${entry.income}</td>
+          <td>${entry.expense}</td>
+          <td>${entry.type}</td>
+          <td>${entry.note}</td>
+          <td>${entry.balance}</td>
+          <td class="action-btns">
+            <button onclick="editEntry(${entry.id})" class="edit">এডিট</button>
+            <button onclick="deleteEntry(${entry.id})">ডিলিট</button>
+          </td>
+        `;
+        tbody.appendChild(row);
+        totalIncome += entry.income;
+        totalExpense += entry.expense;
+      });
+
+      document.getElementById("totalIncome").innerText = totalIncome;
+      document.getElementById("totalExpense").innerText = totalExpense;
+      document.getElementById("netBalance").innerText = totalIncome - totalExpense;
+    }
+
+    renderTable();
+  </script>
+</body>
+</html>
