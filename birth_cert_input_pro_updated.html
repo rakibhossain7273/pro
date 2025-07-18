@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Birth Certificate Input Form</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+<style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .container {
+      background-color: #111;
+      border-radius: 15px;
+      padding: 30px;
+      max-width: 800px;
+      margin: 50px auto;
+      box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+    }
+    label {
+      font-size: 14px;
+      color: #bbb;
+      margin-bottom: 6px;
+    }
+    .form-control {
+      background-color: #222;
+      color: #fff;
+      border: 1px solid #444;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      font-size: 15px;
+      padding: 10px;
+    }
+    .form-control::placeholder {
+      color: #777;
+    }
+    .btn-primary {
+      background: linear-gradient(to right, #007bff, #0056b3);
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      padding: 10px 25px;
+      margin-top: 20px;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(to right, #0056b3, #003974);
+    }
+    .lang-toggle {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      padding: 4px 10px;
+      font-size: 11px;
+      border-radius: 15px;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+<button class="btn btn-success lang-toggle" id="toggleLangBtn">সব ইংরেজিতে দেখান</button>
+<div class="container">
+<h2 class="text-center mb-4">Birth Certificate Input Form</h2>
+<form id="birthForm"><label for="officeName">রেজিঃ অফিসের নাম</label><input class="form-control" id="officeName" placeholder="রেজিঃ অফিসের নাম" type="text"/><label for="subdistrictInfo">উপজেলা/পৌরসভা/সিটি কর্পোরেশন, জেলা</label><input class="form-control" id="subdistrictInfo" placeholder="উপজেলা/পৌরসভা/সিটি কর্পোরেশন, জেলা" type="text"/><label for="regDate">নিবন্ধনের তারিখ (DD/MM/YYYY)</label><input class="form-control" id="regDate" placeholder="নিবন্ধনের তারিখ (DD/MM/YYYY)" type="text"/><label for="regNumber">জন্ম নিবন্ধন নম্বর</label><input class="form-control" id="regNumber" placeholder="জন্ম নিবন্ধন নম্বর" type="text"/><label for="issueDate">প্রদানের তারিখ (DD/MM/YYYY)</label><input class="form-control" id="issueDate" placeholder="প্রদানের তারিখ (DD/MM/YYYY)" type="text"/><label for="dob">জন্মতারিখ (DD/MM/YYYY)</label><input class="form-control" id="dob" placeholder="জন্মতারিখ (DD/MM/YYYY)" type="text"/><label for="dobWord">জন্মতারিখ (কথায়)</label><input class="form-control" id="dobWord" placeholder="জন্মতারিখ (কথায়)" type="text"/><label for="gender">লিঙ্গ</label><input class="form-control" id="gender" placeholder="লিঙ্গ" type="text"/><label for="nameBn">নাম (বাংলায়)</label><input class="form-control" id="nameBn" placeholder="নাম (বাংলায়)" type="text"/><label for="nameEn">নাম (ইংরেজি)</label><input class="form-control" id="nameEn" placeholder="নাম (ইংরেজি)" type="text"/><label for="motherBn">মাতার নাম (বাংলায়)</label><input class="form-control" id="motherBn" placeholder="মাতার নাম (বাংলায়)" type="text"/><label for="motherEn">মাতার নাম (ইংরেজি)</label><input class="form-control" id="motherEn" placeholder="মাতার নাম (ইংরেজি)" type="text"/><label for="fatherBn">পিতার নাম (বাংলায়)</label><input class="form-control" id="fatherBn" placeholder="পিতার নাম (বাংলায়)" type="text"/><label for="fatherEn">পিতার নাম (ইংরেজি)</label><input class="form-control" id="fatherEn" placeholder="পিতার নাম (ইংরেজি)" type="text"/><label for="birthPlaceBn">জন্মস্থান (বাংলায়)</label><input class="form-control" id="birthPlaceBn" placeholder="জন্মস্থান (বাংলায়)" type="text"/><label for="birthPlaceEn">জন্মস্থান (ইংরেজি)</label><input class="form-control" id="birthPlaceEn" placeholder="জন্মস্থান (ইংরেজি)" type="text"/><label for="addressBn">স্থায়ী ঠিকানা (বাংলায়)</label><input class="form-control" id="addressBn" placeholder="স্থায়ী ঠিকানা (বাংলায়)" type="text"/><label for="addressEn">স্থায়ী ঠিকানা (ইংরেজি)</label><input class="form-control" id="addressEn" placeholder="স্থায়ী ঠিকানা (ইংরেজি)" type="text"/><button class="btn btn-primary" onclick="generateCertificate()" type="button">Generate Certificate</button></form>
+</div>
+<script>
+function generateCertificate() {
+  const data = {
+    regDate: document.getElementById('regDate')?.value,
+    regNumber: document.getElementById('regNumber')?.value,
+    issueDate: document.getElementById('issueDate')?.value,
+    dob: document.getElementById('dob')?.value,
+    dobWord: document.getElementById('dobWord')?.value,
+    gender: document.getElementById('gender')?.value,
+    nameBn: document.getElementById('nameBn')?.value,
+    nameEn: document.getElementById('nameEn')?.value,
+    motherBn: document.getElementById('motherBn')?.value,
+    motherEn: document.getElementById('motherEn')?.value,
+    fatherBn: document.getElementById('fatherBn')?.value,
+    fatherEn: document.getElementById('fatherEn')?.value,
+    birthPlaceBn: document.getElementById('birthPlaceBn')?.value,
+    birthPlaceEn: document.getElementById('birthPlaceEn')?.value,
+    addressBn: document.getElementById('addressBn')?.value,
+    addressEn: document.getElementById('addressEn')?.value,
+    officeName: document.getElementById('officeName')?.value,
+    subdistrictInfo: document.getElementById('subdistrictInfo')?.value
+  };
+  sessionStorage.setItem('birthCertificateData', JSON.stringify(data));
+  window.open('certificate.html', '_blank');
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const translations = {
+    "রেজিঃ অফিসের নাম": "Registrar Office Name",
+    "উপজেলা/পৌরসভা/সিটি কর্পোরেশন, জেলা": "Sub-district/Municipality/City Corporation, District",
+    "নিবন্ধনের তারিখ (DD/MM/YYYY)": "Date of Registration (DD/MM/YYYY)",
+    "জন্ম নিবন্ধন নম্বর": "Birth Registration Number",
+    "প্রদানের তারিখ (DD/MM/YYYY)": "Date of Issuance (DD/MM/YYYY)",
+    "জন্মতারিখ (DD/MM/YYYY)": "Date of Birth (DD/MM/YYYY)",
+    "জন্মতারিখ (কথায়)": "Date of Birth (In Words)",
+    "নাম (বাংলায়)": "Name (Bangla)",
+    "নাম (ইংরেজি)": "Name (English)",
+    "মাতার নাম (বাংলায়)": "Mother's Name (Bangla)",
+    "মাতার নাম (ইংরেজি)": "Mother's Name (English)",
+    "পিতার নাম (বাংলায়)": "Father's Name (Bangla)",
+    "পিতার নাম (ইংরেজি)": "Father's Name (English)",
+    "জন্মস্থান (বাংলায়)": "Place of Birth (Bangla)",
+    "জন্মস্থান (ইংরেজি)": "Place of Birth (English)",
+    "স্থায়ী ঠিকানা (বাংলায়)": "Permanent Address (Bangla)",
+    "স্থায়ী ঠিকানা (ইংরেজি)": "Permanent Address (English)"
+  };
+
+  let isEnglish = false;
+  document.getElementById("toggleLangBtn").addEventListener("click", function () {
+    const labels = document.querySelectorAll("label");
+    labels.forEach(label => {
+      const current = label.innerText.trim();
+      const newText = isEnglish ? Object.keys(translations).find(key => translations[key] === current) : translations[current];
+      if (newText) label.innerText = newText;
+    });
+    isEnglish = !isEnglish;
+    this.innerText = isEnglish ? "সব বাংলায় দেখান" : "সব ইংরেজিতে দেখান";
+  });
+});
+</script>
+</body>
+</html>
