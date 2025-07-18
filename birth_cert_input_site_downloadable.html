@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birth Certificate Input Form</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'SolaimanLipi', Arial, sans-serif;
+      padding: 20px;
+      background-color: #f8f9fa;
+    }
+    .form-control {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="text-center mb-4">Birth Certificate Input Form</h2>
+
+  <form id="birthForm">
+    <input type="text" class="form-control" id="regDate" placeholder="Date of Registration (DD/MM/YYYY)">
+    <input type="text" class="form-control" id="regNumber" placeholder="Birth Registration Number">
+    <input type="text" class="form-control" id="issueDate" placeholder="Date of Issuance (DD/MM/YYYY)">
+    <input type="text" class="form-control" id="dob" placeholder="Date of Birth (DD/MM/YYYY)">
+    <input type="text" class="form-control" id="dobWord" placeholder="Date of Birth (In Words)">
+    <select class="form-control" id="gender">
+      <option>Male</option>
+      <option>Female</option>
+      <option>Other</option>
+    </select>
+    <input type="text" class="form-control" id="nameBn" placeholder="Name (বাংলায়)">
+    <input type="text" class="form-control" id="nameEn" placeholder="Name (English)">
+    <input type="text" class="form-control" id="motherBn" placeholder="Mother's Name (বাংলায়)">
+    <input type="text" class="form-control" id="motherEn" placeholder="Mother's Name (English)">
+    <input type="text" class="form-control" id="fatherBn" placeholder="Father's Name (বাংলায়)">
+    <input type="text" class="form-control" id="fatherEn" placeholder="Father's Name (English)">
+    <input type="text" class="form-control" id="birthPlaceBn" placeholder="Place of Birth (বাংলায়)">
+    <input type="text" class="form-control" id="birthPlaceEn" placeholder="Place of Birth (English)">
+    <input type="text" class="form-control" id="addressBn" placeholder="Permanent Address (বাংলায়)">
+    <input type="text" class="form-control" id="addressEn" placeholder="Permanent Address (English)">
+
+    <button type="button" class="btn btn-primary" onclick="generateCertificate()">Generate Certificate</button>
+  </form>
+</div>
+
+<script>
+function generateCertificate() {
+  const data = {
+    regDate: document.getElementById('regDate').value,
+    regNumber: document.getElementById('regNumber').value,
+    issueDate: document.getElementById('issueDate').value,
+    dob: document.getElementById('dob').value,
+    dobWord: document.getElementById('dobWord').value,
+    gender: document.getElementById('gender').value,
+    nameBn: document.getElementById('nameBn').value,
+    nameEn: document.getElementById('nameEn').value,
+    motherBn: document.getElementById('motherBn').value,
+    motherEn: document.getElementById('motherEn').value,
+    fatherBn: document.getElementById('fatherBn').value,
+    fatherEn: document.getElementById('fatherEn').value,
+    birthPlaceBn: document.getElementById('birthPlaceBn').value,
+    birthPlaceEn: document.getElementById('birthPlaceEn').value,
+    addressBn: document.getElementById('addressBn').value,
+    addressEn: document.getElementById('addressEn').value
+  };
+
+  sessionStorage.setItem('birthCertificateData', JSON.stringify(data));
+
+  window.open('certificate.html', '_blank');
+}
+</script>
+
+</body>
+</html>
